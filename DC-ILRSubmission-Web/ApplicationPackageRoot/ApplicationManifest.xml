@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ApplicationManifest xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ApplicationTypeName="DC_ILRSubmission_WebType" ApplicationTypeVersion="1.0.0" xmlns="http://schemas.microsoft.com/2011/01/fabric">
+  <Parameters>
+    <Parameter Name="DC.SF.IlrSubmission.Web_InstanceCount" DefaultValue="-1" />
+    <Parameter Name="QueueName" DefaultValue="TestQueueinParam" />
+    <Parameter Name="ServiceBusConnectionString" DefaultValue="notavailable" />
+    <Parameter Name="ApplicationInsightsInstrumentationKey" DefaultValue="appinsightskey" />
+    <Parameter Name="IlrFileStorageAccontName" DefaultValue="notavailable" />
+    <Parameter Name="IlrFileStorageAccontKey" DefaultValue="notavailable" />
+  </Parameters>
+  <ServiceManifestImport>
+    <ServiceManifestRef ServiceManifestName="DC.SF.IlrSubmission.WebPkg" ServiceManifestVersion="1.0.0" />
+    <ConfigOverrides>
+      <ConfigOverride Name="Config">
+        <Settings>
+          <Section Name="ServiceBusQueue">
+            <Parameter Name="QueueName" Value="[QueueName]" />
+            <Parameter Name="ServiceBusConnectionString" Value="[ServiceBusConnectionString]" />
+            <Parameter Name="ApplicationInsightsInstrumentationKey" Value="[ApplicationInsightsInstrumentationKey]" />
+          </Section>
+          <Section Name="StorageAccount">
+            <Parameter Name="IlrFileStorageAccontName" Value="[IlrFileStorageAccontName]" />
+            <Parameter Name="IlrFileStorageAccontKey" Value="[IlrFileStorageAccontKey]" />
+          </Section>
+        </Settings>
+      </ConfigOverride>
+    </ConfigOverrides>
+    <EnvironmentOverrides CodePackageRef="Code">
+      <EnvironmentVariable Name="ASPNETCORE_ENVIRONMENT" Value="Development" />
+    </EnvironmentOverrides>
+  </ServiceManifestImport>
+  <DefaultServices>
+    <Service Name="DC.SF.IlrSubmission.Web" ServicePackageActivationMode="ExclusiveProcess">
+      <StatelessService ServiceTypeName="DC.SF.IlrSubmission.WebType" InstanceCount="[DC.SF.IlrSubmission.Web_InstanceCount]">
+        <SingletonPartition />
+      </StatelessService>
+    </Service>
+  </DefaultServices>
+</ApplicationManifest>

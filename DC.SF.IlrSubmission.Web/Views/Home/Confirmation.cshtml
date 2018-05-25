@@ -1,0 +1,14 @@
+﻿
+@{
+    ViewData["Title"] = "Confirmation";
+    var correlationId = ViewData["CorrelationId"];
+}
+
+<h3 class="heading-medium">Yay! Successfully Submitted the ILR.</h3>
+
+<p class="">
+    Please click this link to view the status of your submission: @Html.ActionLink("link","Status","Home", new { correlationId })
+
+</p>
+
+

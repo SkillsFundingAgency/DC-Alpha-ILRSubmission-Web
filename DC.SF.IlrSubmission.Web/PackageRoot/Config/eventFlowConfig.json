@@ -1,0 +1,28 @@
+﻿{
+  "inputs": [
+    {
+      "type": "EventSource",
+      "Sources": [
+        {
+          "providerName": "ESFA-DC.ILR.Processing.POC-DC.ILR.ValidationService.TestWebClient"
+        }
+      ]
+    }
+  ],
+  "filters": [
+    {
+      "type": "drop",
+      "include": "Level == Verbose"
+
+    }
+  ],
+  "outputs": [
+    {
+      "type": "ApplicationInsights",
+      "instrumentationKey": "servicefabric:/Config/ApplicationInsightsInstrumentationKey"
+    }
+  ],
+  "schemaVersion": "2016-08-11",
+  "extensions": []
+
+}
